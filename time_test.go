@@ -12,30 +12,29 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-package tools_test
+package tools
 
 import (
 	"fmt"
 	"testing"
-	"tools"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestUnixIntToTimeStr(t *testing.T) {
-	timeStr := tools.Date(1598094878, "YYYY-MM-DD HH:mm:ss")
+	timeStr := Date(1598094878, "YYYY-MM-DD HH:mm:ss")
 	fmt.Printf("time: %s\n", timeStr)
 	assert.Equal(t, "2020-08-22 19:14:38", timeStr)
 }
 
 func TestUnixStrToTimeStr(t *testing.T) {
-	timeStr := tools.DateS("1598094878", "YYYY-MM-DD HH:mm:ss")
+	timeStr := DateS("1598094878", "YYYY-MM-DD HH:mm:ss")
 	fmt.Printf("time: %s\n", timeStr)
 	assert.Equal(t, "2020-08-22 19:14:38", timeStr)
 }
 
 func TestParseStrToDateTime(t *testing.T) {
-	value, err := tools.ParseStrToDate("2019-01-02 02:22:05", "YYYY-MM-DD hh:mm:ss", "Asia/Shanghai")
+	value, err := ParseStrToDate("2019-01-02 02:22:05", "YYYY-MM-DD hh:mm:ss", "Asia/Shanghai")
 	assert.Equal(t, nil, err)
 	zoneName, _ := value.Zone()
 	assert.Equal(t, 2019, value.Year())
@@ -45,7 +44,7 @@ func TestParseStrToDateTime(t *testing.T) {
 }
 
 func TestParseStrToDate(t *testing.T) {
-	value, err := tools.ParseStrToDate("2020-10-22", "YYYY-MM-DD", "Asia/Shanghai")
+	value, err := ParseStrToDate("2020-10-22", "YYYY-MM-DD", "Asia/Shanghai")
 	assert.Equal(t, nil, err)
 	zoneName, _ := value.Zone()
 	assert.Equal(t, 2020, value.Year())
