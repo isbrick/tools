@@ -35,7 +35,7 @@ func TestUnixStrToTimeStr(t *testing.T) {
 }
 
 func TestParseStrToDateTime(t *testing.T) {
-	value, err := tools.ParseStrToDateTime("2019-01-02 15:22:05", "Asia/Shanghai")
+	value, err := tools.ParseStrToDate("2019-01-02 02:22:05", "YYYY-MM-DD hh:mm:ss", "Asia/Shanghai")
 	assert.Equal(t, nil, err)
 	zoneName, _ := value.Zone()
 	assert.Equal(t, 2019, value.Year())
@@ -45,7 +45,7 @@ func TestParseStrToDateTime(t *testing.T) {
 }
 
 func TestParseStrToDate(t *testing.T) {
-	value, err := tools.ParseStrToDate("2020-10-22", "Asia/Shanghai")
+	value, err := tools.ParseStrToDate("2020-10-22", "YYYY-MM-DD", "Asia/Shanghai")
 	assert.Equal(t, nil, err)
 	zoneName, _ := value.Zone()
 	assert.Equal(t, 2020, value.Year())

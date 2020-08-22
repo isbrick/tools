@@ -68,22 +68,37 @@ func DateT(t time.Time, format string) string {
 	return res
 }
 
-// ParseStrToDate format: 2006-01-02
-func ParseStrToDate(timestr, locationName string) (time.Time, error) {
+// ParseStrToDate ..
+// timeStr
+// format
+// locationName, when locationName is "", defaultLocation rely on system env.
+func ParseStrToDate(timestr, format, locationName string) (time.Time, error) {
+	timeFormat := TimeFormatParse(format)
 	loc := gettimeLocation(locationName)
-	timeValue, err := time.ParseInLocation("2006-01-02", timestr, loc)
+	timeValue, err := time.ParseInLocation(timeFormat, timestr, loc)
 	return timeValue, err
 }
 
-// ParseStrToDateTime format: 2006-01-02 15:04:05
-func ParseStrToDateTime(timestr, locationName string) (time.Time, error) {
-	loc := gettimeLocation(locationName)
-	timeValue, err := time.ParseInLocation("2006-01-02 15:04:05", timestr, loc)
-	return timeValue, err
+// TimeFormatParse ..
+func TimeFormatParse(formatStr string) string {
+	res := strings.Replace(formatStr, "MM", "01", -1)
+	res = strings.Replace(res, "M", "1", -1)
+	res = strings.Replace(res, "DD", "02", -1)
+	res = strings.Replace(res, "D", "2", -1)
+	res = strings.Replace(res, "YYYY", "2006", -1)
+	res = strings.Replace(res, "YY", "06", -1)
+	res = strings.Replace(res, "HH", "15", -1)
+	res = strings.Replace(res, "H", "15", -1)
+	res = strings.Replace(res, "hh", "03", -1)
+	res = strings.Replace(res, "h", "3", -1)
+	res = strings.Replace(res, "mm", "04", -1)
+	res = strings.Replace(res, "m", "4", -1)
+	res = strings.Replace(res, "ss", "05", -1)
+	res = strings.Replace(res, "s", "5", -1)
+	return res
 }
 
 // gettimeLocation
-// defaultLocation rely on system timezone
 func gettimeLocation(locationName string) *time.Location {
 	var loc *time.Location
 	if locationName == "" {
