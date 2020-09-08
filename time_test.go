@@ -55,6 +55,12 @@ func TestParseStrToDate(t *testing.T) {
 	fmt.Printf("value: %v\n", value)
 }
 
+func TestParseDateTimeStr(t *testing.T) {
+	value, _ := ParseStrToDate("2020-10-22", "YYYY-MM-DD", "Asia/Shanghai")
+	timeStr := ParseDateToStr(value, "YYYY-MM")
+	fmt.Printf("timeStr: %s\n", timeStr)
+	assert.Equal(t, "2020-10", timeStr)
+}
 func TestComparison(t *testing.T) {
 	value1, _ := ParseStrToDate("2020-10-22", "YYYY-MM-DD", "Asia/Shanghai")
 	value2, _ := ParseStrToDate("2020-10-22", "YYYY-MM-DD", "Asia/Shanghai")

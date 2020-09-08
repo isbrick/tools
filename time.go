@@ -73,29 +73,30 @@ func DateT(t time.Time, format string) string {
 // format
 // locationName, when locationName is "", defaultLocation rely on system env.
 func ParseStrToDate(timestr, format, locationName string) (time.Time, error) {
-	timeFormat := TimeFormatParse(format)
+	timeFormat := timeFormatParse(format)
 	loc := gettimeLocation(locationName)
 	timeValue, err := time.ParseInLocation(timeFormat, timestr, loc)
 	return timeValue, err
 }
 
-// TimeFormatParse ..
-func TimeFormatParse(formatStr string) string {
-	res := strings.Replace(formatStr, "MM", "01", -1)
-	res = strings.Replace(res, "M", "1", -1)
-	res = strings.Replace(res, "DD", "02", -1)
-	res = strings.Replace(res, "D", "2", -1)
-	res = strings.Replace(res, "YYYY", "2006", -1)
-	res = strings.Replace(res, "YY", "06", -1)
-	res = strings.Replace(res, "HH", "15", -1)
-	res = strings.Replace(res, "H", "15", -1)
-	res = strings.Replace(res, "hh", "03", -1)
-	res = strings.Replace(res, "h", "3", -1)
-	res = strings.Replace(res, "mm", "04", -1)
-	res = strings.Replace(res, "m", "4", -1)
-	res = strings.Replace(res, "ss", "05", -1)
-	res = strings.Replace(res, "s", "5", -1)
-	return res
+// ParseDateToStr ..
+// MM - month - 01
+// M - month - 1, single bit
+// DD - day - 02
+// D - day 2
+// YYYY - year - 2006
+// YY - year - 06
+// HH - 24 hours - 03
+// H - 24 hours - 3
+// hh - 12 hours - 03
+// h - 12 hours - 3
+// mm - minute - 04
+// m - minute - 4
+// ss - second - 05
+// s - second = 5
+func ParseDateToStr(timeValue time.Time, format string) string {
+	formatStr := timeFormatParse(format)
+	return timeValue.Format(formatStr)
 }
 
 // TimeComparison time
@@ -111,6 +112,25 @@ func TimeComparison(time1, time2 time.Time) int {
 	} else {
 		return 2
 	}
+}
+
+// timeFormatParse ..
+func timeFormatParse(formatStr string) string {
+	res := strings.Replace(formatStr, "MM", "01", -1)
+	res = strings.Replace(res, "M", "1", -1)
+	res = strings.Replace(res, "DD", "02", -1)
+	res = strings.Replace(res, "D", "2", -1)
+	res = strings.Replace(res, "YYYY", "2006", -1)
+	res = strings.Replace(res, "YY", "06", -1)
+	res = strings.Replace(res, "HH", "15", -1)
+	res = strings.Replace(res, "H", "15", -1)
+	res = strings.Replace(res, "hh", "03", -1)
+	res = strings.Replace(res, "h", "3", -1)
+	res = strings.Replace(res, "mm", "04", -1)
+	res = strings.Replace(res, "m", "4", -1)
+	res = strings.Replace(res, "ss", "05", -1)
+	res = strings.Replace(res, "s", "5", -1)
+	return res
 }
 
 // gettimeLocation
