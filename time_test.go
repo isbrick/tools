@@ -68,3 +68,10 @@ func TestComparisonTimeZone(t *testing.T) {
 	value := Comparison(value1, value2)
 	assert.Equal(t, 2, value)
 }
+
+func TestComparisonTimeGreaterThan(t *testing.T) {
+	value1, _ := ParseStrToDate("2020-10-22", "YYYY-MM-DD", "Asia/Shanghai")
+	value2, _ := ParseStrToDate("2020-10-02", "YYYY-MM-DD", "Asia/Shanghai")
+	value := Comparison(value1, value2)
+	assert.Equal(t, 1, value)
+}
