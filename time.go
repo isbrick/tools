@@ -98,6 +98,21 @@ func TimeFormatParse(formatStr string) string {
 	return res
 }
 
+// Comparison time
+// 0 equal,
+// 1 time1 greater than time2
+// 2 time1 less than time2
+func Comparison(time1, time2 time.Time) int {
+	subSeconds := time1.Sub(time2).Seconds()
+	if subSeconds == 0 {
+		return 0
+	} else if subSeconds > 0 {
+		return 1
+	} else {
+		return 2
+	}
+}
+
 // gettimeLocation
 func gettimeLocation(locationName string) *time.Location {
 	var loc *time.Location

@@ -54,3 +54,17 @@ func TestParseStrToDate(t *testing.T) {
 	assert.Equal(t, "CST", zoneName)
 	fmt.Printf("value: %v\n", value)
 }
+
+func TestComparison(t *testing.T) {
+	value1, _ := ParseStrToDate("2020-10-22", "YYYY-MM-DD", "Asia/Shanghai")
+	value2, _ := ParseStrToDate("2020-10-22", "YYYY-MM-DD", "Asia/Shanghai")
+	value := Comparison(value1, value2)
+	assert.Equal(t, 0, value)
+}
+
+func TestComparisonTimeZone(t *testing.T) {
+	value1, _ := ParseStrToDate("2020-10-22", "YYYY-MM-DD", "Asia/Shanghai")
+	value2, _ := ParseStrToDate("2020-10-22", "YYYY-MM-DD", "UTC")
+	value := Comparison(value1, value2)
+	assert.Equal(t, 2, value)
+}
