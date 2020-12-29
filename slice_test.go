@@ -34,3 +34,19 @@ func TestIsSliceContainsInt(t *testing.T) {
 	result := IsSliceContainsInt([]int{12, 13}, 12)
 	assert.Equal(t, true, result)
 }
+
+func TestIntSliceUnion(t *testing.T) {
+	result := IntSliceUnion([]int{12, 13, 1}, []int{12, 13, 2})
+	assert.Equal(t, 4, len(result))
+}
+
+func TestIntSliceDifference(t *testing.T) {
+	result := IntSliceDifference([]int{12, 13, 1}, []int{12, 13, 2})
+	assert.Equal(t, 1, result[0])
+}
+
+func TestIntSliceIntersect(t *testing.T) {
+	result := IntSliceIntersect([]int{12, 13, 1}, []int{12, 13, 2})
+	assert.Equal(t, 12, result[0])
+	assert.Equal(t, 13, result[1])
+}
