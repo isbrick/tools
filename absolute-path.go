@@ -58,8 +58,6 @@ func AppPath() string {
 		if err != nil {
 			panic("look executable path: " + err.Error())
 		}
-		log.Trace("appPath: %s", appPath)
-
 		appPath, err = filepath.Abs(appPath)
 		if err != nil {
 			panic("get absolute executable path: " + err.Error())
